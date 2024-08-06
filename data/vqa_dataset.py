@@ -16,22 +16,27 @@ class vqa_dataset(Dataset):
         self.transform = transform
         self.vqa_root = vqa_root
         self.vg_root = vg_root
+        self.annotation = []
         
-        if split=='train':
-            urls = {'vqa_train':'https://storage.googleapis.com/sfr-vision-language-research/datasets/vqa_train.json',
-                    'vqa_val':'https://storage.googleapis.com/sfr-vision-language-research/datasets/vqa_val.json',
-                    'vg_qa':'https://storage.googleapis.com/sfr-vision-language-research/datasets/vg_qa.json'}
+        # if split=='train':
+        #     urls = {'vqa_train':'https://storage.googleapis.com/sfr-vision-language-research/datasets/vqa_train.json',
+        #             'vqa_val':'https://storage.googleapis.com/sfr-vision-language-research/datasets/vqa_val.json',
+        #             'vg_qa':'https://storage.googleapis.com/sfr-vision-language-research/datasets/vg_qa.json'}
         
-            self.annotation = []
-            for f in train_files:
-                download_url(urls[f],ann_root)
-                self.annotation += json.load(open(os.path.join(ann_root,'%s.json'%f),'r'))
-        else:
-            download_url('https://storage.googleapis.com/sfr-vision-language-research/datasets/vqa_test.json',ann_root)
-            self.annotation = json.load(open(os.path.join(ann_root,'vqa_test.json'),'r'))    
+        #     for f in train_files:
+        #         download_url(urls[f],ann_root)
+        #         self.annotation += json.load(open(os.path.join(ann_root,'%s.json'%f),'r'))
+        # else:
+        #     download_url('https://storage.googleapis.com/sfr-vision-language-research/datasets/vqa_test.json',ann_root)
+        #     self.annotation = json.load(open(os.path.join(ann_root,'vqa_test.json'),'r'))    
             
-            download_url('https://storage.googleapis.com/sfr-vision-language-research/datasets/answer_list.json',ann_root)
-            self.answer_list = json.load(open(os.path.join(ann_root,'answer_list.json'),'r'))    
+        #     download_url('https://storage.googleapis.com/sfr-vision-language-research/datasets/answer_list.json',ann_root)
+        #     self.answer_list = json.load(open(os.path.join(ann_root,'answer_list.json'),'r'))    
+
+
+        for f_ in train_files:
+            with open(ann_root + "/" + f_+'.json') as fp:
+                self.annotation += json.load(fp)
                 
         
     def __len__(self):

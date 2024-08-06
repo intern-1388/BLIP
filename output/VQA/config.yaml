@@ -1,0 +1,18 @@
+ann_root: ann_root
+batch_size_test: 2
+batch_size_train: 2
+image_size: 480
+inference: rank
+init_lr: 2.0e-05
+k_test: 128
+max_epoch: 10
+min_lr: 0
+pretrained: https://storage.googleapis.com/sfr-vision-language-research/BLIP/models/model_base_vqa_capfilt_large.pth
+train_files:
+- dataInfoFileTest
+vg_root: /export/share/datasets/vision/visual-genome/
+vit: base
+vit_ckpt_layer: 0
+vit_grad_ckpt: false
+vqa_root: C:/Users/AIIntern/Desktop/BlipMyVersion/BLIP/
+weight_decay: 0.05
